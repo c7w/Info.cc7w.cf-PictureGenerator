@@ -5,7 +5,8 @@ from requests_html import HTMLSession
 import re
 # Create your views here.
 def index(request):
-    score = getSomething(564032)
+    uid = request.GET.get('uid',1)
+    score = getSomething(int(uid))
     #return HttpResponse(m)
     return render(request,'index.html',{'score':score})
     
@@ -64,6 +65,7 @@ def getSomething(n):
     score[11] = re.match('贡献(.*) 点', score[11]).group(1)
     score[12] = re.match('爱心(.*) 心', score[12]).group(1)
     score[13] = re.match('钻石(.*) 颗', score[13]).group(1)
+    score.append( int(score[7]) + int(score[8]) * 100 )
     return score
     
 #m = getSomething(564032)
