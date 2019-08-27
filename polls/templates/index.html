@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>test</title>
+    </head>
+    <body>
+    <table border="1">
+        <!-- <form action="/polls/" method="post">
+            {% csrf_token %}
+            <P>
+                <label >用户名:</label>
+                <input type="text" name ='name'/>
+            </P>
+            <P>
+                <label>密码：</label>
+                <input type="text" name='password'/>
+            </P>
+            <p><input type="submit" value="提交"/></p>
+        </form> -->
+        <thead>
+        <tr>
+            <td>用户名</td>
+            <td>密码</td>
+        </tr>
+        </thead>
+        {%for i in range(1,14)%}
+            <tr>
+                <td>{{score[i]}}</td>
+                <td>{{score[i]}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    </body>
+
+</html>
+
