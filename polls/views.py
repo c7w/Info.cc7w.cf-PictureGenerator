@@ -5,7 +5,7 @@ from requests_html import HTMLSession
 import re
 # Create your views here.
 def index(request):
-    m = getSomething(564032)
+    score = getSomething(564032)
     #return HttpResponse(m)
     return render(request,'index.html',{'score':score})
     
