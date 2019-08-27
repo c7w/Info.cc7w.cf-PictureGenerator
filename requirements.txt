@@ -1,0 +1,7 @@
+django
+gunicorn
+django-heroku
+requests_html
+pandas
+beautifulsoup4
+pillow
