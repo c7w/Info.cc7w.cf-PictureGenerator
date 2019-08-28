@@ -65,7 +65,10 @@ def getSomething(n):
     score[11] = match('贡献(.*) 点', score[11],1)
     score[12] = match('爱心(.*) 心', score[12],1)
     score[13] = match('钻石(.*) 颗', score[13],1)
-    score.append( int(score[7]) + int(score[8]) * 100 )
+    try:
+        score.append( int(score[7]) + int(score[8]) * 100 )
+    except:
+        score.append("-")
     return score
 def match(a,b,n):
     try:
