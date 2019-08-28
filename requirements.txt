@@ -3,4 +3,3 @@ gunicorn
 django-heroku
 requests_html
 pandas
-mysqlclient
