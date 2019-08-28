@@ -1,24 +1,20 @@
-from flask import Flask
-from flask_restplus import Resource, Api, fields
-from werkzeug.contrib.fixers import ProxyFix
-
+from flask import Flask, Response, escape,request
 app = Flask(__name__)
-app.wsgi_app = ProxyFix(app.wsgi_app)
-api = Api(app,
-          version='0.1',
-          title='c7w写的破程序',
-          description='c7w写的破API'
-)
 
-@api.route('/hello_world')
-class HelloWorld(Resource):
-    def get(self):
-        return {'hello': 'world'}
+@app.route('/')
+def hello():
+    name = request.args.get("name", "World")
+    return f'Hello, {escape(name)}!'
+    
+@app.route('/user/<username>')
+def show_user_profile(username):
+    # show the user profile for that user
+    return 'User %s' % username
 
-@api.route('/')
-class Hello(Resource):
-    def get(self):
-        return "this"
-
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    # show the post with the given id, the id is an integer
+    return 'Post %d' % post_id
+    
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
