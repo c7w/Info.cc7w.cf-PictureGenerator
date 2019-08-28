@@ -52,21 +52,26 @@ def getSomething(n):
             score.append('')
             # score[f] = t[0].text
     print(score[1].replace(u'\xa0 ','')) 
-    score[4] = re.match('(.*)\(UID: (.*)\)', score[1].replace(u'\xa0 ','')).group(2)
-    score[1] = re.match('(.*)\(UID: (.*)\)', score[1].replace(u'\xa0 ','')).group(1)
-    score[2] = re.match('主题数 (.*)', score[2]).group(1)
-    score[3] = re.match('回帖数 (.*)', score[3]).group(1)
-    score[5] = re.match('积分(.*)', score[5]).group(1)
-    score[6] = re.match('人气(.*) 点', score[6]).group(1)
-    score[7] = re.match('金粒(.*) 粒', score[7]).group(1)
-    score[8] = re.match('金锭(.*) 块', score[8]).group(1)
-    score[9] = re.match('绿宝石(.*) 颗', score[9]).group(1)
-    score[10] = re.match('下界之星(.*) 枚', score[10]).group(1)
-    score[11] = re.match('贡献(.*) 点', score[11]).group(1)
-    score[12] = re.match('爱心(.*) 心', score[12]).group(1)
-    score[13] = re.match('钻石(.*) 颗', score[13]).group(1)
+    score[4] = match('(.*)\(UID: (.*)\)', score[1].replace(u'\xa0 ',''),2)
+    score[1] = match('(.*)\(UID: (.*)\)', score[1].replace(u'\xa0 ',''),1)
+    score[2] = match('主题数 (.*)', score[2],1)
+    score[3] = match('回帖数 (.*)', score[3],1)
+    score[5] = match('积分(.*)', score[5],1)
+    score[6] = match('人气(.*) 点', score[6],1)
+    score[7] = match('金粒(.*) 粒', score[7],1)
+    score[8] = match('金锭(.*) 块', score[8],1)
+    score[9] = match('绿宝石(.*) 颗', score[9],1)
+    score[10] = match('下界之星(.*) 枚', score[10],1)
+    score[11] = match('贡献(.*) 点', score[11],1)
+    score[12] = match('爱心(.*) 心', score[12],1)
+    score[13] = match('钻石(.*) 颗', score[13],1)
     score.append( int(score[7]) + int(score[8]) * 100 )
     return score
-    
+def match(a,b,n):
+    try:
+        get = re.match(a, b).group(n)
+    except:
+        get = '-'
+    return get
 #m = getSomething(564032)
 #print(m)
