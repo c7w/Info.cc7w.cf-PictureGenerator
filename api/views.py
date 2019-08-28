@@ -1,6 +1,4 @@
 #coding=utf-8
-from django.shortcuts import render
-from django.http import HttpResponse
 from requests_html import HTMLSession
 import re
 
