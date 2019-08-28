@@ -5,61 +5,13 @@
         <title>Account Stats</title>
     </head>
     <body>
-        <table border = 1 align = "center" cellpadding="0">
-        <thead>
-            <tr>
-                <td align = "center" colspan = "4" width="500px">账号统计/Account Stats</td>
-            </tr>
-        </thead>
-        <tr>
-            <td align = "center" colspan = '2' width="250px">{{score.1}}<br>({{score.4}})</td>
-            <td align = "center" colspan = '2' rowspan = '3' width="250px"><img src="https://www.mcbbs.net/uc_server/avatar.php?uid={{score.4}}&size=big"/></td>
-        </tr>
-        <tr>
-            <td align = "center" colspan = '2'>积分: {{score.5}}</td>
-        </tr>
-        <tr>
-            <td align = "center" colspan = '2'>发帖数: {{score.2}}<br>回帖数: {{score.3}}</td>
-        </tr>
-        <tr>
-            <td align = "center" colspan = '2'>人气: {{score.6}}</td>
-            <td align = "center" colspan = '2'>贡献: {{score.11}}</td>
-        </tr>
-        <tr>
-            <td align = "center" colspan = '2'>金粒: {{score.7}}</td>
-            <td align = "center" colspan = '2'>金锭: {{score.8}}</td>
-        </tr>
-        <tr>
-            <td align = "center" colspan = '2'>爱心: {{score.12}}</td>
-            <td align = "center" colspan = '2'>绿宝石: {{score.9}}</td>
-        </tr>
-        <tr>
-            <td align = "center" colspan = '2'>钻石: {{score.13}}</td>
-            <td align = "center" colspan = '2'>下界之星: {{score.10}}</td>
-        </tr>
-
-
-       
-       
-       </table>
-        <!-- <form action="/polls/" method="post">
-            {% csrf_token %}
-            <P>
-                <label >用户名:</label>
-                <input type="text" name ='name'/>
-            </P>
-            <P>
-                <label>密码：</label>
-                <input type="text" name='password'/>
-            </P>
-            <p><input type="submit" value="提交"/></p>
-        </form> -->
-<!--         {%for i in score%}
-            <tr>
-                <td>This</td>
-                <td>{{i}}</td>
-            </tr>
-        {% endfor %} -->
+        {% if list.1 %}
+            <h1>Hello {{ list.1 }}!</h1>
+        {% else %}
+            <h1>Hello World!</h1>
+        {% endif %}
+        <br>
+        {{list.2}}
     </body>
 
 </html>
