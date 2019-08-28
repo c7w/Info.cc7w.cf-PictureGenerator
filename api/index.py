@@ -1,9 +1,10 @@
-from flask import Flask, Response
+from flask import Flask, Response, escape,request
 app = Flask(__name__)
 
-@app.route('/', defaults={'path': ''})
-def catch_all(path):
-    return Response("<h1>Flask on Now</h1><p>You visited: /%s</p>" % (path), mimetype="text/html")
+@app.route('/')
+def hello():
+    name = request.args.get("name", "World")
+    return f'Hello, {escape(name)}!'
     
 @app.route('/user/<username>')
 def show_user_profile(username):
@@ -14,3 +15,6 @@ def show_user_profile(username):
 def show_post(post_id):
     # show the post with the given id, the id is an integer
     return 'Post %d' % post_id
+    
+if __name__ == '__main__':
+    app.run()
