@@ -45,7 +45,7 @@ def get_mcbbs_score(uid=None):
     getName = request.args.get('username')
     if getUid:
         try:
-            uid = int(uid)
+            uid = int(getUid)
         except:
             return render_template('./get-mcbbs-score/error.html',list = [source,getUid])
         profile = score.getScoreFromUid(getUid)
