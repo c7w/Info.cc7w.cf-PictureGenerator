@@ -1,5 +1,5 @@
 {
-    "version": 2,
+    "version": 3,
     "name": "c7w's test",
     "builds": [
         { "src": "*.py", "use": "@liudonghua123/now-flask" , "config": { "maxLambdaSize": "30mb" } }

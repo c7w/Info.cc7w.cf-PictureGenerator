@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{list.username}} | Account Stats 账号统计</title>
+        <style>
+            table.Table {
+              width: 550px;
+              background-color: #def4fa;
+              border-collapse: separate;
+              border-width: 2px;
+              border-color: #000000;
+              border-style: dotted;
+              color: #000000;
+            }
+
+            table.Table td, table.Table th {
+              border-width: 1px;
+              border-color: #000000;
+              border-style: dotted;
+              padding: 1px;
+            }
+
+            table.Table thead {
+              background-color: #ffcc00;
+            }
+            
+            table.Table tr.a1 td 
+              {
+                border-width: 1px;
+                border-style: dotted;
+                padding: 1px;
+                background-color:#AAEEFF;
+              }
+              
+            table.Table tr.a2 td 
+              {
+                border-width: 1px;
+                border-style: dotted;
+                padding: 1px;
+                background-color:#CCF5FF;
+              }
+        </style>
+    </head>
+    <body>
+    <br><br><br><br>
+        <table class="Table" align = "center">
+            <thead>
+                <tr>
+                    <td align = "center" colspan = "4"><b>账号统计 / Account Stats</b></td>
+                </tr>
+            </thead>
+          <tbody>
+            <tr>
+              <td colspan="2" align='center' width="275px"><b>{{list.username}}</b></td>
+              <td align = "center" colspan = '2' rowspan = '5' width="275px"><img src="https://www.mcbbs.net/uc_server/avatar.php?uid={{list.uid}}&size=big"/></td>
+            </tr>
+            <tr>
+              <td colspan="2" align='center'>(UID: {{list.uid}})</td>
+            </tr>
+            <tr>
+              <td colspan="2" align='center'>{{list.usergroup}}</td>
+            </tr>
+            <tr>
+              <td colspan="2" align='center'>在线时间: {{list.onlineTime}}小时<br>注:本条目论坛仍未修复</td>
+            </tr>
+            <tr>
+              <td colspan="2" align='center'>注册时间: {{list.regTime}}<br>上次登录时间: {{list.lastSeenTime}}</td>
+            </tr>
+            <tr class='a1'>
+              <td colspan = '2' align = 'center'>主题数: {{list.topic}} | 回复数: {{list.reply}}</td>
+              <td colspan = "2" align = 'center'><b>生成时间: {{list.time}}<i></td>
+            </tr>
+            <tr class = 'a2'>
+              <td colspan = '2' align = 'center'>人气: {{list.score[1]}}</td>
+              <td colspan = "2" align = 'center'>下界之星: {{list.score[5]}}</td>
+            </tr>
+            <tr class='a1'>
+              <td colspan = '2' align = 'center'>金粒: {{list.score[2]}}</td>
+              <td colspan = "2" align = 'center'>贡献: {{list.score[6]}}</td>
+            </tr>
+            <tr class = 'a2'>
+              <td colspan = '2' align = 'center'>金锭: {{list.score[3]}}</td>
+              <td colspan = "2" align = 'center'>爱心: {{list.score[7]}}</td>
+            </tr>
+            <tr class='a1'>
+              <td colspan = '2' align = 'center'>绿宝石: {{list.score[4]}}</td>
+              <td colspan = "2" align = 'center'>钻石: {{list.score[8]}}</td>
+            </tr>
+            <tr class = 'a2'>
+              <td colspan = '2' align = 'center'>勋章数: {{list.medal}}</td>
+              <td colspan = "2" align = 'center'><b>总积分: {{list.score[0]}}</b></td>
+            </tr>
+
+        </tbody>
+      </table>
+    
+
+    </body>
+
+</html>
+
