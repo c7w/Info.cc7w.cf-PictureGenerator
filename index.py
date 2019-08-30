@@ -1,9 +1,19 @@
 import utils.getMcbbsScore as score
+import utils.MCBBSScoreRank as rank
 
+from flask_apscheduler import APScheduler;
 from flask import Flask, Response, escape,request,render_template
 from requests_html import HTMLSession
 
+class Config(object):
+    SCHEDULER_API_ENABLED = True
+
 app = Flask(__name__)
+
+app.config.from_object(Config())
+scheduler = APScheduler();
+scheduler.init_app(app)
+scheduler.start()
 
 @app.route('/')
 def index():
@@ -56,6 +66,12 @@ def get_mcbbs_score(uid=None):
     #进入提醒页面 提醒输入数据
     return render_template('./get-mcbbs-score/index.html')
 
+@app.route('/mcbbs-rank')
+def mcbbs_rank():
+    result = rank.get()
+    return render_template('./mcbbs-score-rank/result.html' , content = result)
+    
+
 @app.route('/hello/')
 @app.route('/hello/<name>')
 def hello(name=None):
@@ -64,6 +80,8 @@ def hello(name=None):
         2: 2333
             }
     return render_template('index.html' , list = list)
+
+rank.startJob(app)
 
 if __name__ == '__main__':
     app.run()
