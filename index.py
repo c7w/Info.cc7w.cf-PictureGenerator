@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
     
-@app.route('/get-mcbbs-score',methods=['GET', 'POST'])
+@app.route('/get-mcbbs-score',methods=['GET'])
 @app.route('/get-mcbbs-score/<int:uid>')
 def get_mcbbs_score(uid=None):
     #快捷方式 直接通过UID直接获取
@@ -22,25 +22,23 @@ def get_mcbbs_score(uid=None):
             return render_template('./get-mcbbs-score/error.html',list = ['uid',uid])
     
     #处理表单 获取数据
-    if request.method=="POST":
-        source = request.form.get('source')
-        val = request.form.get('val')
+    if request.method=="GET":
+        source = request.args.get('source')
+        val = request.args.get('val')
         
-        if val == '':
-            return render_template('./get-mcbbs-score/error.html',list = [source,val])
-        if source == 'uid':
-            try:
-                val = int(val)
-            except:
-                return render_template('./get-mcbbs-score/error.html',list = [source,val])
-            profile = score.getScoreFromUid(val)
-        else:
-            profile = score.getScoreFromUsername(val)
-            
-        #Do Something Here
-        return render_template('./get-mcbbs-score/score.html',list=profile)
-    
-    #尝试处理 get 请求
+        #返回成功获取的数据
+        if source and val:
+            if source == 'uid':
+                try:
+                    val = int(val)
+                except:
+                    return render_template('./get-mcbbs-score/error.html',list = [source,val])
+                profile = score.getScoreFromUid(val)
+            else:
+                profile = score.getScoreFromUsername(val)
+            return render_template('./get-mcbbs-score/score.html',list=profile)
+
+    #尝试处理不带参数的 GET 请求
     getUid = request.args.get('uid')
     getName = request.args.get('username')
     if getUid:
