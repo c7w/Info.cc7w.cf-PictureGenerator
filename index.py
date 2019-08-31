@@ -15,6 +15,8 @@ scheduler = APScheduler();
 scheduler.init_app(app)
 scheduler.start()
 
+rank.startJob(app)
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -66,11 +68,15 @@ def get_mcbbs_score(uid=None):
     #进入提醒页面 提醒输入数据
     return render_template('./get-mcbbs-score/index.html')
 
+# MCBBS-Rank
 @app.route('/mcbbs-rank')
-def mcbbs_rank():
-    result = rank.get()
+@app.route('/mcbbs-rank/<path>')
+def mcbbs_rank(path=None):
+    if path == 'forceUpdate':
+        rank.forceUpdate()
+        return 'Force Update Completed.'
+    result = rank.output()
     return render_template('./mcbbs-score-rank/result.html' , content = result)
-    
 
 @app.route('/hello/')
 @app.route('/hello/<name>')
@@ -80,8 +86,6 @@ def hello(name=None):
         2: 2333
             }
     return render_template('index.html' , list = list)
-
-rank.startJob(app)
 
 if __name__ == '__main__':
     app.run()

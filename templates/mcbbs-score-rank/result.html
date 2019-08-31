@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <style type="text/css">
+        #result
+            {
+                margin:0 auto;
+            }
+        #result td
+            {
+                text-align:center;
+            }
+        #result th 
+            {
+                text-align:center;
+                padding-top:5px;
+                padding-bottom:4px;
+                background-color:#A7C942;
+                color:#ffffff;
+            }
+        </style>
         <meta charset="UTF-8">
         <title>统计结果</title>
     </head>
     <body>
-        <h1>统计结果</h1>
-        <br><br><br>
+        <p><a href='/'><-点我返回工具页</a></p>
         {{content|safe}}
+        <br>
+        <p align = "center">数据将会在每天的 0,9,12,15,18,21 点刷新</p>
+        <p align = "center">如果这里没有你，说明你的UID并没有添加到监测行列</p>
+        <p align = "center">请联系 1345979462(MCBBS) 或 admin@cc7w.cf</p>
     </body>
 
 </html>

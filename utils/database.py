@@ -1,23 +1,29 @@
-import sqlite3
 import pandas as pd
 import os
 
-def execute(sql):
-    conn = sqlite3.connect('output.db')
-    cursor = conn.cursor()
-    try:
-        cursor.execute(sql)
-        conn.commit()
-    except Exception as e:
-        print('--------------------------------------------')
-        print('[ERROR] 数据库在执行' + sql + '时发生错误.')
-        print(e)
-        print('--------------------------------------------')
-    conn.close()
+def createTable(name,columns):
+    global dic
+    dic[name] = pd.DataFrame(columns=columns)
+    print("---------------------------------")
+    print("数据表 " +name+" 创建完成")
+    print("---------------------------------")
 
-def get():
-    sql_db = sqlite3.connect('output.db')
-    df = pd.read_sql_query("select * from score", sql_db)
-    df = df.set_index('score')
-    df = df.sort_index(ascending=False)
-    return df.to_html()
+def getTable(name):
+    global dic
+    try:
+        result = dic[name]
+        return result
+    except KeyError:
+        print("---------------------------------")
+        print("数据表 " +name+" 不存在")
+        print("---------------------------------")
+        return 
+    except NameError:
+        dic = {}
+        print("---------------------------------")
+        print("数据库初始化完成")
+        print("---------------------------------")
+        return
+
+def setTable(name,df):
+    dic[name] = df
