@@ -1,3 +1,4 @@
+gunicorn
 requests_html
 flask
 flask_restplus
