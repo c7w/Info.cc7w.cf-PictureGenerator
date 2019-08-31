@@ -91,7 +91,8 @@ def getUidList():
     uidlist = []
     for uid in file:
         uidlist.append(int(str(uid).replace('\n','')))
-    O = 10
+    #修改每次获取的数目
+    O = 3
     l = len(uidlist)
     j = int(l/O)+1
     k = l%O
@@ -113,10 +114,7 @@ def getUidList():
 def startJob(app):
     database.getTable('score')
     createTable()
-    list = getUidList()
-    n = list[0]
-    for i in range(1,n+1):
-        app.apscheduler.add_job(func=updateProfile,args=[list[i]], id='Mcbbs-Rank-'+str(i), trigger='cron',hour = '0,9,12,15,18,21',minute=str(i),second='0')
+    app.apscheduler.add_job(func=forceUpdate,args=[app]], id='Mcbbs-Rank-'+str(i), trigger='cron',hour = '0,9,12,15,18,21',minute='0',second='0')
     
     #app.apscheduler.add_job(func=updateProfile,args=[], id='1', trigger='interval', seconds=20)
     # print(result2)
