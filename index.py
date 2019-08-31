@@ -73,8 +73,8 @@ def get_mcbbs_score(uid=None):
 @app.route('/mcbbs-rank/<path>')
 def mcbbs_rank(path=None):
     if path == 'forceUpdate':
-        rank.forceUpdate()
-        return 'Force Update Completed.'
+        rank.forceUpdate(app)
+        return '已加入获取队列，请返回。'
     result = rank.output()
     return render_template('./mcbbs-score-rank/result.html' , content = result)
 

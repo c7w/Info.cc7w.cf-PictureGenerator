@@ -1,6 +1,7 @@
 import utils.getMcbbsScore as getMcbbsScore
 import utils.database as database
 import pandas as pd
+from datetime import datetime,timedelta
 
 def getProfile(n):
     profile = getMcbbsScore.getScoreFromUid(n)
@@ -76,17 +77,20 @@ def output():
 def createTable():
     database.createTable('score',['time','uid','username','usergroup','topic','reply','onlineTime','regTime','lastSeenTime','medal','rq','jl','jd','lbs','xjzx','gx','ax','zs','score'])
 
-def forceUpdate():
-    updateProfile(getUidList('force'))
+def forceUpdate(app):
+    list = getUidList()
+    n = list[0]
+    now = datetime.now()
+    for i in range(1,n+1):
+        time = now + timedelta(seconds=10*(i-1)) 
+        app.apscheduler.add_job(func=updateProfile,args=[list[i]], id='[Forced]Mcbbs-Rank-'+str(i)+str(time), trigger='date',run_date=time)
     return
 
-def getUidList(one=None):
+def getUidList():
     file = open('./templates/mcbbs-score-rank/list.txt','r')
     uidlist = []
     for uid in file:
         uidlist.append(int(str(uid).replace('\n','')))
-    if one:
-        return uidlist
     O = 10
     l = len(uidlist)
     j = int(l/O)+1
