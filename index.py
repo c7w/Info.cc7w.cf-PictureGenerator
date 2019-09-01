@@ -1,7 +1,7 @@
 import utils.getMcbbsScore as score
 import utils.MCBBSScoreRank as rank
 
-from datatime import datetime,timedelta
+from datetime import datetime,timedelta
 from flask_apscheduler import APScheduler;
 from flask import Flask, Response, escape,request,render_template
 from requests_html import HTMLSession
