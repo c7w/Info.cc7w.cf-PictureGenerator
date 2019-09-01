@@ -73,6 +73,8 @@ def output():
         return result
     except ValueError:
         return '数据获取失败：数据仍未更新。'
+    except TypeError:
+    	return '排序失败'
 
 def createTable():
     database.createTable('score',['time','uid','username','usergroup','topic','reply','onlineTime','regTime','lastSeenTime','medal','rq','jl','jd','lbs','xjzx','gx','ax','zs','score'])

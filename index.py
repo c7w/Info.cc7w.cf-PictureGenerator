@@ -16,6 +16,8 @@ scheduler = APScheduler();
 scheduler.init_app(app)
 scheduler.start()
 
+rank.startJob(app)
+
 def updateProfile(list):
 	rank.updateProfile(list)
 
