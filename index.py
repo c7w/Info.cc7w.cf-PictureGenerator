@@ -1,6 +1,7 @@
 import utils.getMcbbsScore as score
 import utils.MCBBSScoreRank as rank
 
+from datatime import datetime,timedelta
 from flask_apscheduler import APScheduler;
 from flask import Flask, Response, escape,request,render_template
 from requests_html import HTMLSession
@@ -15,8 +16,19 @@ scheduler = APScheduler();
 scheduler.init_app(app)
 scheduler.start()
 
-rank.startJob(app)
+def updateProfile(list):
+	rank.updateProfile(list)
 
+def forceUpdate(app):
+    list = rank.getUidList()
+    n = list[0]
+    now = datetime.now()
+    for i in range(1,n+1):
+        time = now + timedelta(seconds=10*(i-1)) 
+        app.apscheduler.add_job(func=updateProfile,args=[list[i]], id='[Forced]Mcbbs-Rank-'+str(i)+str(time), trigger='date',run_date=time)
+    return
+
+##### 路由设置 #####
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -73,7 +85,7 @@ def get_mcbbs_score(uid=None):
 @app.route('/mcbbs-rank/<path>')
 def mcbbs_rank(path=None):
     if path == 'forceUpdate':
-        rank.forceUpdate(app)
+        forceUpdate(app)
         return '已加入获取队列，请返回。'
     result = rank.output()
     return render_template('./mcbbs-score-rank/result.html' , content = result)
