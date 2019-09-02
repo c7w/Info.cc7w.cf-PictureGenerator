@@ -91,8 +91,7 @@ def forceUpdate(isAll=False):
  #   now = datetime.now()
  #   for i in range(1,n+1):
 #        time = now + timedelta(seconds=10*(i-1)) 
-#        pass
-    return
+#        pass #return
 
 def getUidList(isAll=False):
     file = open('./templates/mcbbs-score-rank/list.txt','r')
