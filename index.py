@@ -7,11 +7,7 @@ from requests_html import HTMLSession
 
 app = Flask(__name__)
 
-app.config.from_object(Config())
-scheduler = APScheduler();
-scheduler.init_app(app)
-scheduler.start()
-
+##### 初始化 #####
 rank.startJob()
 
 ##### 路由设置 #####
