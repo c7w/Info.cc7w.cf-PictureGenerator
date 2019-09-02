@@ -5,10 +5,11 @@ from datetime import datetime,timedelta
 from flask import Flask, Response, escape,request,render_template
 from requests_html import HTMLSession
 
-app = Flask(__name__)
-
 ##### 初始化 #####
 rank.startJob()
+################
+
+app = Flask(__name__)
 
 ##### 路由设置 #####
 @app.route('/')
