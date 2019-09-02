@@ -86,13 +86,12 @@ def forceUpdate(isAll=False):
 		updateProfile(list)
 		return
     ### 改
-	return
-    list = getUidList()
-    n = list[0]
-    now = datetime.now()
-    for i in range(1,n+1):
-        time = now + timedelta(seconds=10*(i-1)) 
-        pass
+ #   list = getUidList()
+  #  n = list[0]
+ #   now = datetime.now()
+ #   for i in range(1,n+1):
+#        time = now + timedelta(seconds=10*(i-1)) 
+#        pass
     return
 
 def getUidList(isAll=False):
