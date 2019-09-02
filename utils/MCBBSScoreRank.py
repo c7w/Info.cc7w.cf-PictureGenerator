@@ -79,22 +79,31 @@ def output():
 def createTable():
     database.createTable('score',['time','uid','username','usergroup','topic','reply','onlineTime','regTime','lastSeenTime','medal','rq','jl','jd','lbs','xjzx','gx','ax','zs','score'])
 
-def forceUpdate(app):
+###改
+def forceUpdate(isAll=False):
+	if isAll:
+		list = getUidList(True)
+		updateProfile(list)
+		return
+    ### 改
+	return
     list = getUidList()
     n = list[0]
     now = datetime.now()
     for i in range(1,n+1):
         time = now + timedelta(seconds=10*(i-1)) 
-        app.apscheduler.add_job(func=updateProfile,args=[list[i]], id='[Forced]Mcbbs-Rank-'+str(i)+str(time), trigger='date',run_date=time)
+        pass
     return
 
-def getUidList():
+def getUidList(isAll=False):
     file = open('./templates/mcbbs-score-rank/list.txt','r')
     uidlist = []
     for uid in file:
         uidlist.append(int(str(uid).replace('\n','')))
+    if isAll:
+    	return uidlist
     #修改每次获取的数目
-    O = 5
+    O = 4
     l = len(uidlist)
     j = int(l/O)+1
     k = l%O
@@ -113,10 +122,7 @@ def getUidList():
         list.append(temp)
     return list
 
-def startJob(app):
+def startJob():
     database.getTable('score')
     createTable()
-    app.apscheduler.add_job(func=forceUpdate,args=[app], id='Mcbbs-Rank', trigger='cron',hour = '0,9,12,15,18,21',minute='0',second='0')
-    
-    #app.apscheduler.add_job(func=updateProfile,args=[], id='1', trigger='interval', seconds=20)
-    # print(result2)
+    forceUpdate(True)
