@@ -77,31 +77,36 @@ def output():
     	return '排序失败'
 
 def createTable():
+	if not( database.getTable('score') == False) :
+		return
     database.createTable('score',['time','uid','username','usergroup','topic','reply','onlineTime','regTime','lastSeenTime','medal','rq','jl','jd','lbs','xjzx','gx','ax','zs','score'])
 
-###改
-def forceUpdate(isAll=False):
-	if isAll:
-		list = getUidList(True)
-		updateProfile(list)
-		return
-    ### 改
- #   list = getUidList()
-  #  n = list[0]
- #   now = datetime.now()
- #   for i in range(1,n+1):
-#        time = now + timedelta(seconds=10*(i-1)) 
-#        pass #return
+def forceUpdate(i=None):
+	if i:
+		getId = int(i)
+    else:
+    	getId = int(database.getConf('rank.taskId'))
+    list = getUidList()
+    n = list[0]
+    if getId > n:
+    	getId=1
+    ulist = uidlist[getId]
+    updateProfile(ulist)
+    newId =getId+1
+    database.setConf('rank.taskId',newId)
+    content = {
+        'id' : getId,
+        'uid' : ulist,
+    }
+    return content
 
-def getUidList(isAll=False):
+def getUidList():
     file = open('./templates/mcbbs-score-rank/list.txt','r')
     uidlist = []
     for uid in file:
         uidlist.append(int(str(uid).replace('\n','')))
-    if isAll:
-    	return uidlist
     #修改每次获取的数目
-    O = 4
+    O = 6
     l = len(uidlist)
     j = int(l/O)+1
     k = l%O
@@ -123,4 +128,5 @@ def getUidList(isAll=False):
 def startJob():
     database.getTable('score')
     createTable()
-    forceUpdate(True)
+    ### 初始化taskid
+    database.setConf('rank.taskId',1)

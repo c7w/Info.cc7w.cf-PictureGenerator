@@ -17,7 +17,7 @@ def getTable(name):
         print("---------------------------------")
         print("数据表 " +name+" 不存在")
         print("---------------------------------")
-        return 
+        return False
     except NameError:
         dic = {}
         print("---------------------------------")
@@ -25,5 +25,18 @@ def getTable(name):
         print("---------------------------------")
         return
 
+def setConf(conf,value):
+	global dic
+	dic[conf] = value
+
+def getConf(conf,default=None):
+	global dic
+	value = dic.get(conf)
+	if value:
+		return value
+	else:
+		return default
+
 def setTable(name,df):
+	global dic
     dic[name] = df
