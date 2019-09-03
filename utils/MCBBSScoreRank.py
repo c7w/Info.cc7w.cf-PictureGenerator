@@ -91,7 +91,7 @@ def forceUpdate(i=None):
     n = list[0]
     if getId > n:
     	getId=1
-    ulist = uidlist[getId]
+    ulist = list[getId]
     updateProfile(ulist)
     newId =getId+1
     database.setConf('rank.taskId',newId)
