@@ -26,17 +26,17 @@ def getTable(name):
         return
 
 def setConf(conf,value):
-	global dic
-	dic[conf] = value
+    global dic
+    dic[conf] = value
 
 def getConf(conf,default=None):
-	global dic
-	value = dic.get(conf)
-	if value:
-		return value
-	else:
-		return default
+    global dic
+    value = dic.get(conf)
+    if value:
+        return value
+    else:
+        return default
 
 def setTable(name,df):
-	global dic
+    global dic
     dic[name] = df
