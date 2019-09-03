@@ -78,8 +78,9 @@ def output():
 
 def createTable():
 	if not( database.getTable('score') == False) :
-		return
-    database.createTable('score',['time','uid','username','usergroup','topic','reply','onlineTime','regTime','lastSeenTime','medal','rq','jl','jd','lbs','xjzx','gx','ax','zs','score'])
+        return
+    else:
+        database.createTable('score',['time','uid','username','usergroup','topic','reply','onlineTime','regTime','lastSeenTime','medal','rq','jl','jd','lbs','xjzx','gx','ax','zs','score'])
 
 def forceUpdate(i=None):
 	if i:
