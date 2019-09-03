@@ -77,14 +77,14 @@ def output():
     	return '排序失败'
 
 def createTable():
-	if not( database.getTable('score') == False) :
+    if not( database.getTable('score') == False) :
         return
     else:
         database.createTable('score',['time','uid','username','usergroup','topic','reply','onlineTime','regTime','lastSeenTime','medal','rq','jl','jd','lbs','xjzx','gx','ax','zs','score'])
 
 def forceUpdate(i=None):
-	if i:
-		getId = int(i)
+    if i:
+        getId = int(i)
     else:
     	getId = int(database.getConf('rank.taskId'))
     list = getUidList()
