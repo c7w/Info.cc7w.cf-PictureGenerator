@@ -3,12 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <title>数据更新中...</title>
+        <meta http-equiv="refresh" content="{{content.interval}};url=/mcbbs-rank/update">
     </head>
     <body>
         <p><a href='/mcbbs-rank'><-点我返回上页</a></p>
-        <p>现在正在获取: </p>
-        <p>任务 ID: {{content.id}}</p>
-        <p>当前正在获取 UID: {{content.uid}}</p>
+        <p>获取成功: </p>
+        <p>本次任务 ID: {{content.id}}</p>
+        <p>本次任务获取 ID: {{content.uid}}</p>
+        <p>将在 {{content.interval}} 秒后跳转</p>
         <p align = "center">请不要强制关闭空白页面，而是点击上面的返回退出。</p>
     </body>
 

@@ -1,6 +1,3 @@
-gunicorn
 requests_html
 flask
-flask_restplus
-flask-apscheduler
 pandas

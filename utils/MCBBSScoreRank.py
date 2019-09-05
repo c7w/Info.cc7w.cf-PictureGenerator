@@ -68,8 +68,8 @@ def output():
             Delta.append(diff)
         Delta.append('-')
         df['Delta'] = pd.DataFrame(Delta)
-        df = df.rename(columns={"Rank":"排名","time":"最近一次获取时间","username":"用户名","usergroup":"用户组","score":"积分","Delta":""})
-        result = df.to_html(justify='center',table_id='result',escape=False,index=False,columns=['排名','最近一次获取时间','用户名','用户组','积分',''])
+        df = df.rename(columns={"Rank":"排名","time":"最近一次获取时间","username":"用户名","usergroup":"用户组","score":"积分","Delta":"",'uid':'UID'})
+        result = df.to_html(justify='center',table_id='result',escape=False,index=False,columns=['排名','最近一次获取时间','UID','用户名','用户组','积分',''])
         return result
     except ValueError:
         return '数据获取失败：数据仍未更新。'
@@ -83,21 +83,25 @@ def createTable():
         database.createTable('score',['time','uid','username','usergroup','topic','reply','onlineTime','regTime','lastSeenTime','medal','rq','jl','jd','lbs','xjzx','gx','ax','zs','score'])
 
 def forceUpdate(i=None):
-    if i:
-        getId = int(i)
-    else:
-    	getId = int(database.getConf('rank.taskId'))
+	default()
     list = getUidList()
     n = list[0]
+    if i and i<= n:
+        getId = i
+        interval = 600
+    else:
+    	getId = int(database.getConf('rank.taskId'))
+        interval = 3
     if getId > n:
     	getId=1
     ulist = list[getId]
-    updateProfile(ulist)
     newId =getId+1
     database.setConf('rank.taskId',newId)
+    updateProfile(ulist)
     content = {
         'id' : getId,
         'uid' : ulist,
+        'interval' : interval,
     }
     return content
 
@@ -126,8 +130,9 @@ def getUidList():
         list.append(temp)
     return list
 
-def startJob():
-    database.getTable('score')
-    createTable()
-    ### 初始化taskid
-    database.setConf('rank.taskId',1)
+def default():
+    if database.getConf('rank.taskId',-1) = -1:
+ ,      database.getTable('score')
+        createTable()
+        ### 初始化taskid
+        database.setConf('rank.taskId',1)

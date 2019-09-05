@@ -5,10 +5,6 @@ from datetime import datetime,timedelta
 from flask import Flask, Response, escape,request,render_template
 from requests_html import HTMLSession
 
-##### 初始化 #####
-rank.startJob()
-################
-
 app = Flask(__name__)
 
 ##### 路由设置 #####
@@ -66,8 +62,17 @@ def get_mcbbs_score(uid=None):
 # MCBBS-Rank
 @app.route('/mcbbs-rank')
 @app.route('/mcbbs-rank/<path>')
-def mcbbs_rank(path=None):
-    if path == 'forceUpdate':
+@app.route('/mcbbs-rank/update/<id>')
+def mcbbs_rank(path=None,id=None):
+    if id:
+    	try:
+    	    id = int(id)
+            content = rank.forceUpdate(id)
+            return render_template('./mcbbs-score-rank/update.html' , content = content)
+        except:
+        	content = rank.forceUpdate()
+            return render_template('./mcbbs-score-rank/update.html' , content = content)
+    if path == 'update':
         content = rank.forceUpdate()
         return render_template('./mcbbs-score-rank/update.html' , content = content)
     result = rank.output()
