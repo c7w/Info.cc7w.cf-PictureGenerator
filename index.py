@@ -65,7 +65,7 @@ def get_mcbbs_score(uid=None):
 @app.route('/mcbbs-rank/update/<id>')
 def mcbbs_rank(path=None,id=None):
     if id:
-       try:
+        try:
             id = int(id)
             content = rank.forceUpdate(id)
             return render_template('./mcbbs-score-rank/update.html' , content = content)
