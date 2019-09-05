@@ -70,7 +70,7 @@ def mcbbs_rank(path=None,id=None):
             content = rank.forceUpdate(id)
             return render_template('./mcbbs-score-rank/update.html' , content = content)
         except:
-        	content = rank.forceUpdate()
+            content = rank.forceUpdate()
             return render_template('./mcbbs-score-rank/update.html' , content = content)
 
     else:
