@@ -83,7 +83,7 @@ def createTable():
         database.createTable('score',['time','uid','username','usergroup','topic','reply','onlineTime','regTime','lastSeenTime','medal','rq','jl','jd','lbs','xjzx','gx','ax','zs','score'])
 
 def forceUpdate(i=None):
-	default()
+    default()
     list = getUidList()
     n = list[0]
     if i and i<= n:
