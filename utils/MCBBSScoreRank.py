@@ -90,10 +90,10 @@ def forceUpdate(i=None):
         getId = i
         interval = 600
     else:
-    	getId = int(database.getConf('rank.taskId'))
+        getId = int(database.getConf('rank.taskId'))
         interval = 3
     if getId > n:
-    	getId=1
+        getId=1
     ulist = list[getId]
     newId =getId+1
     database.setConf('rank.taskId',newId)
