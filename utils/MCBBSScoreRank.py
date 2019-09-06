@@ -78,7 +78,7 @@ def output():
     	return '排序失败'
 
 def createTable():
-    if not( database.getTable('score') == False) :
+    if ( database.getTable('score',True) ) :
         return
     else:
         database.createTable('score',['time','uid','username','usergroup','topic','reply','onlineTime','regTime','lastSeenTime','medal','rq','jl','jd','lbs','xjzx','gx','ax','zs','score'])

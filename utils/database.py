@@ -8,10 +8,12 @@ def createTable(name,columns):
     print("数据表 " +name+" 创建完成")
     print("---------------------------------")
 
-def getTable(name):
+def getTable(name,exist=False):
     global dic
     try:
         result = dic[name]
+        if exist:
+            return True
         return result
     except KeyError:
         print("---------------------------------")
