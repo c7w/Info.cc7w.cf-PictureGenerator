@@ -74,8 +74,6 @@ def output():
         return result
     except ValueError:
         return '数据获取失败：数据仍未更新。'
-    except TypeError:
-    	return '排序失败'
 
 def createTable():
     if ( database.getTable('score',True) ) :
@@ -134,7 +132,7 @@ def getUidList():
 def default():
     try:
         id = database.getConf('rank.taskId',-1)
-        if id == -1:
+        if id != -1:
             return
         else: 
             database.getTable('score')
