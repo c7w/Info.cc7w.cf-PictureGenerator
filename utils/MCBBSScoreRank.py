@@ -51,6 +51,7 @@ def updateProfile(uidlist):
     addline('score',profilelist)
 
 def output():
+	default()
     try:
         df = database.getTable('score')
         df['Rank'] = df['score'].rank(method='max',ascending=False)
@@ -131,7 +132,16 @@ def getUidList():
     return list
 
 def default():
-    if database.getConf('rank.taskId',-1) == -1:
+    try:
+        id = database.getConf('rank.taskId',-1)
+        if id == -1:
+            return
+        else: 
+            database.getTable('score')
+            createTable()
+            ### 初始化taskid
+            database.setConf('rank.taskId',1)
+    except:
         database.getTable('score')
         createTable()
         ### 初始化taskid
