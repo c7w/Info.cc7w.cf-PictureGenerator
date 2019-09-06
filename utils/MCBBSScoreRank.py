@@ -51,7 +51,7 @@ def updateProfile(uidlist):
     addline('score',profilelist)
 
 def output():
-	default()
+    default()
     try:
         df = database.getTable('score')
         df['Rank'] = df['score'].rank(method='max',ascending=False)
