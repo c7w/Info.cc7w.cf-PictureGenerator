@@ -63,13 +63,16 @@ def output():
         for i in range(1,len):
             numthis = df.at[df.index[i-1],'score']
             numnext = df.at[df.index[i],'score']
-            diff = '+' + str(int(numthis)-int(numnext))
-            if diff == 0:
-                diff = ''
+            try:
+                diff = '+' + str(int(numthis)-int(numnext))
+                if diff == 0:
+                    diff = ''
+            except TypeError:
+                diff = '?'
             Delta.append(diff)
         Delta.append('-')
         df['Delta'] = pd.DataFrame(Delta)
-        df = df.rename(columns={"Rank":"排名","time":"最近一次获取时间","username":"用户名","usergroup":"用户组","score":"积分","Delta":"",'uid':'UID'})
+        df = df.rename(columns={"Rank":"排名","time":"最近一次获取时间","username":"用户名","usergroup":"用户组","score":"积分","Delta":"","uid":'UID'})
         result = df.to_html(justify='center',table_id='result',escape=False,index=False,columns=['排名','最近一次获取时间','UID','用户名','用户组','积分',''])
         return result
     except ValueError:
@@ -90,12 +93,12 @@ def forceUpdate(i=None):
         interval = 600
     else:
         getId = int(database.getConf('rank.taskId'))
-        interval = 3
+        interval = 2
+        newId =getId+1
+        database.setConf('rank.taskId',newId)
     if getId > n:
         getId=1
     ulist = list[getId]
-    newId =getId+1
-    database.setConf('rank.taskId',newId)
     updateProfile(ulist)
     content = {
         'id' : getId,
