@@ -132,7 +132,7 @@ def getUidList():
 
 def default():
     if database.getConf('rank.taskId',-1) == -1:
- ,      database.getTable('score')
+        database.getTable('score')
         createTable()
         ### 初始化taskid
         database.setConf('rank.taskId',1)
