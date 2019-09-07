@@ -15,7 +15,7 @@ def getScoreFromUid(uid):
 def getProfile(url):
     session = HTMLSession()
     rawData = session.get(url).html.html
-    uid = match('<span class="xw0">\(UID: (.*)\)</span>',rawData,1)
+    uid = match('<span class="xw0">\(UID: (.*)\)',rawData,1)
     username = match('<meta name="keywords" content="(.*)的个人资料" />',rawData,1)
     usergroup = match('<li>(.*)用户组(.*)target="_blank">(.*)</a></span>  </li>',rawData,3)
     reply = match('<a href="(.*)" target="_blank">好友数 (.*)</a>\n<span class="pipe">\|</span><a href="(.*)" target="_blank">回帖数 (.*)</a>\n<span class="pipe">\|</span>\n<a href="(.*)" target="_blank">主题数 (.*)</a>',rawData,4)

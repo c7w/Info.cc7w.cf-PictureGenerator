@@ -90,7 +90,7 @@ def forceUpdate(i=None):
     n = list[0]
     if i and i<= n:
         getId = i
-        interval = 600
+        interval = 60
     else:
         getId = int(database.getConf('rank.taskId'))
         interval = 2
@@ -113,7 +113,7 @@ def getUidList():
     for uid in file:
         uidlist.append(int(str(uid).replace('\n','')))
     #修改每次获取的数目
-    O = 6
+    O = 5
     l = len(uidlist)
     j = int(l/O)+1
     k = l%O
