@@ -39,6 +39,7 @@ def addline(table,profilelist):
         }
         df = df.append(addition,ignore_index=True)
     database.setTable(table,df)
+    return 0
 
 def updateProfile(uidlist):
     print('-----------------')
@@ -48,7 +49,7 @@ def updateProfile(uidlist):
     for uid in uidlist:
         profilelist.append(getProfile(uid))
     delline('score',uidlist)
-    addline('score',profilelist)
+    re1 = addline('score',profilelist)
     print('-----------------')
     print('获取成功: '+str(uidlist))
     print('-----------------')
@@ -57,6 +58,7 @@ def output():
     default()
     try:
         df = database.getTable('score')
+        print(df)
         df['Rank'] = df['score'].rank(method='first',ascending=False)
         df['Rank'] = df['Rank'].astype(int)
         df = df.set_index('Rank',drop=False)
@@ -78,8 +80,8 @@ def output():
         df = df.rename(columns={"Rank":"排名","time":"最近一次获取时间","username":"用户名","usergroup":"用户组","score":"积分","Delta":"","uid":'UID'})
         result = df.to_html(justify='center',table_id='result',escape=False,index=False,columns=['排名','最近一次获取时间','UID','用户名','用户组','积分',''])
         return result
-    except ValueError:
-        return '数据获取失败：数据仍未更新。'
+    #except ValueError:
+        #return '数据获取失败：数据仍未更新。'
 
 def createTable():
     if ( database.getTable('score',True) ) :
