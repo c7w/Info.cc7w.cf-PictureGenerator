@@ -49,12 +49,15 @@ def updateProfile(uidlist):
         profilelist.append(getProfile(uid))
     delline('score',uidlist)
     addline('score',profilelist)
+    print('-----------------')
+    print('获取成功: '+str(uidlist))
+    print('-----------------')
 
 def output():
     default()
     try:
         df = database.getTable('score')
-        df['Rank'] = df['score'].rank(method='max',ascending=False)
+        df['Rank'] = df['score'].rank(method='first',ascending=False)
         df['Rank'] = df['Rank'].astype(int)
         df = df.set_index('Rank',drop=False)
         df = df.sort_index()
@@ -93,11 +96,11 @@ def forceUpdate(i=None):
         interval = 60
     else:
         getId = int(database.getConf('rank.taskId'))
-        interval = 2
+        interval = 1
+        if getId > n:
+            getId=1
         newId =getId+1
         database.setConf('rank.taskId',newId)
-    if getId > n:
-        getId=1
     ulist = list[getId]
     updateProfile(ulist)
     content = {
@@ -113,7 +116,7 @@ def getUidList():
     for uid in file:
         uidlist.append(int(str(uid).replace('\n','')))
     #修改每次获取的数目
-    O = 5
+    O = 3
     l = len(uidlist)
     j = int(l/O)+1
     k = l%O
