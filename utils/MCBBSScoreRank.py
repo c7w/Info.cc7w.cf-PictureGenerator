@@ -59,7 +59,7 @@ def output():
     try:
         df = database.getTable('score')
         print(df)
-        df['Rank'] = df['score'].rank(method='first',ascending=False)
+        df['Rank'] = df['score'].rank(method='min',ascending=False)
         df['Rank'] = df['Rank'].astype(int)
         df = df.set_index('Rank',drop=False)
         df = df.sort_index()
