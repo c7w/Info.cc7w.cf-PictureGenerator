@@ -7,10 +7,10 @@ from datetime import datetime,timedelta
 from flask import Flask, Response,escape,request,render_template,send_file
 from requests_html import HTMLSession
 
-application = Flask(__name__)
+app = Flask(__name__)
 
 ##### 路由设置 #####
-@application.route('/')
+@app.route('/')
 def index():
     return render_template('index.html')
 
@@ -30,7 +30,7 @@ def index():
 #####是否展示百分比: showPercentage  默认值(True,1,'A',20)
 # 起始点 (50,50) 终止点 (450,80)
 # 进度条颜色 (255,255,255) 进度条边框颜色 (21,100,43)
-@application.route('/map')
+@app.route('/map')
 def map():
     def getParam(param,default):
         return request.args.get(param) or default
@@ -57,4 +57,4 @@ def map():
     return pic.returnImage(pic.map(start,now,end,colorBar=colorBar,colorComplete=colorComplete,startMessage=startMessage,nowMessage=nowMessage,endMessage=endMessage,description=description,showPercentage=showPercentage))
     
 if __name__ == '__main__':
-    application.run(port=$PORT)
+    app.run()
