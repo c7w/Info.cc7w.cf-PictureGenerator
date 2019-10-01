@@ -47,13 +47,12 @@ def map():
 
     if now == 564032:
         now = int(score.getScoreFromUid(564032).get('score')[0])
-        startMessage = eval(getParam('s','["","A",20]'))
-        nowMessage = eval(getParam('n','["","A",20]'))
-        endMessage = eval(getParam('e','["","A",20]'))
-        nowMessage[0] = "当前积分: "+str(now)
-        startMessage = tuple(startMessage)
-        nowMessage = tuple(nowMessage)
-        endMessage = tuple(endMessage)
+        startM = getParam('s','')
+        endM = getParam('e','')
+        nowM = "当前积分: "+str(now)
+        startMessage = (startM,startMessage[1],startMessage[2])
+        nowMessage = (nowM,nowMessage[1],nowMessage[2])
+        endMessage = (endM,endMessage[1],endMessage[2])
     return pic.returnImage(pic.map(start,now,end,colorBar=colorBar,colorComplete=colorComplete,startMessage=startMessage,nowMessage=nowMessage,endMessage=endMessage,description=description,showPercentage=showPercentage))
     
 if __name__ == '__main__':
