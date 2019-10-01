@@ -7,10 +7,10 @@ from datetime import datetime,timedelta
 from flask import Flask, Response,escape,request,render_template,send_file
 from requests_html import HTMLSession
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 ##### 路由设置 #####
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('index.html')
 
@@ -30,7 +30,7 @@ def index():
 #####是否展示百分比: showPercentage  默认值(True,1,'A',20)
 # 起始点 (50,50) 终止点 (450,80)
 # 进度条颜色 (255,255,255) 进度条边框颜色 (21,100,43)
-@app.route('/map')
+@application.route('/map')
 def map():
     def getParam(param,default):
         return request.args.get(param) or default
@@ -50,11 +50,11 @@ def map():
         startMessage = eval(getParam('s','["","A",20]'))
         nowMessage = eval(getParam('n','["","A",20]'))
         endMessage = eval(getParam('e','["","A",20]'))
-        nowMessage[0] = "当前积分:"+str(now)
+        nowMessage[0] = "当前积分: "+str(now)
         startMessage = tuple(startMessage)
         nowMessage = tuple(nowMessage)
         endMessage = tuple(endMessage)
     return pic.returnImage(pic.map(start,now,end,colorBar=colorBar,colorComplete=colorComplete,startMessage=startMessage,nowMessage=nowMessage,endMessage=endMessage,description=description,showPercentage=showPercentage))
     
 if __name__ == '__main__':
-    app.run()
+    application.run()
