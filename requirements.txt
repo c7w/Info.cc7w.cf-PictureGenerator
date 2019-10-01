@@ -1,4 +1,3 @@
 requests_html
 flask
 pillow
-gunicore
