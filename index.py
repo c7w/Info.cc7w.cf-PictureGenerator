@@ -57,4 +57,4 @@ def map():
     return pic.returnImage(pic.map(start,now,end,colorBar=colorBar,colorComplete=colorComplete,startMessage=startMessage,nowMessage=nowMessage,endMessage=endMessage,description=description,showPercentage=showPercentage))
     
 if __name__ == '__main__':
-    application.run()
+    application.run(port=$PORT)
